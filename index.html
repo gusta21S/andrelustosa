@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>André Lustosa | Solicitação</title>
+
+<!-- Fontes Premium: Outfit para display/marca e Inter para UI -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary-gradient: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    --surface-dark: #0f172a;
+    --surface-card: rgba(30, 41, 59, 0.65);
+    --surface-input: rgba(15, 23, 42, 0.8);
+    --border-light: rgba(255, 255, 255, 0.08);
+    --glow-color: rgba(0, 198, 255, 0.3);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #020617;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(0, 114, 255, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(0, 198, 255, 0.1) 0%, transparent 40%);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: hidden;
+  }
+
+  /* Layout Mobile-First App Container */
+  .app-container {
+    width: 100%;
+    max-width: 500px; /* Largura de app */
+    margin-top: 20px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* --- BRANDING --- */
+  .brand-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .brand-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+    background: linear-gradient(to bottom, #ffffff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(0, 198, 255, 0.15));
+    animation: floatBrand 6s ease-in-out infinite;
+  }
+
+  .brand-name span {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes floatBrand {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); filter: drop-shadow(0 10px 25px rgba(0, 198, 255, 0.25)); }
+  }
+
+  h1 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-weight: 400;
+  }
+
+  /* --- SECTIONS (CARDS) --- */
+  .section-card {
+    background: var(--surface-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 
+      0 10px 30px -5px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Efeito de brilho no topo do card */
+  .section-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  }
+
+  .section-card h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Indicador visual ao lado do título */
+  .section-card h2::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00C6FF;
+    box-shadow: 0 0 10px #00C6FF;
+  }
+
+  /* --- INPUTS --- */
+  .input-group {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  input, textarea {
+    width: 100%;
+    background: var(--surface-input);
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 16px 16px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #475569;
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    background: rgba(30, 41, 59, 1);
+    border-color: rgba(0, 198, 255, 0.5);
+    box-shadow: 
+      0 0 0 4px rgba(0, 198, 255, 0.1),
+      inset 0 1px 2px rgba(0,0,0,0.2);
+    transform: scale(1.01);
+  }
+
+  input:focus::placeholder, textarea:focus::placeholder {
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* --- BOTÕES --- */
+  .add-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 14px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .add-btn:hover {
+    background: rgba(0, 198, 255, 0.05);
+    border-color: #00C6FF;
+    color: #00C6FF;
+  }
+
+  .submit-container {
+    position: sticky;
+    bottom: 20px;
+    padding: 0 10px; /* Margem de segurança para telas curvas */
+    z-index: 100;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 18px;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 10px 30px -5px rgba(0, 114, 255, 0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Efeito de brilho passando no botão */
+  .submit-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px -10px rgba(0, 114, 255, 0.6);
+  }
+
+  .submit-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.2);
+    margin-top: 40px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* Animações de Entrada */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /* Começa invisível para animação */
+  }
+
+  .section-card:nth-child(1) { animation-delay: 0.1s; }
+  .section-card:nth-child(2) { animation-delay: 0.2s; }
+  .section-card:nth-child(3) { animation-delay: 0.3s; }
+  .section-card:nth-child(4) { animation-delay: 0.4s; }
+  .section-card:nth-child(5) { animation-delay: 0.5s; }
+
+  /* SVG Icons */
+  .icon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+  
+  <!-- Branding Header (Design Requirement) -->
+  <div class="brand-header">
+    <div class="brand-name">André <span>Lustosa</span></div>
+    <h1>Formulário de Solicitação</h1>
+    <p class="subtitle">Preencha as informações do projeto</p>
+  </div>
+
+  <div class="section-card" style="animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards;">
+    <h2>Dados do Cliente</h2>
+    <input id="nome" type="text" placeholder="Nome completo" autocomplete="name">
+    <input id="telefone" type="tel" placeholder="Telefone / WhatsApp" autocomplete="tel">
+    <input id="email" type="email" placeholder="E-mail" autocomplete="email">
+  </div>
+
+  <div class="section-card" style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;">
+    <h2>Serviços Desejados</h2>
+    <div id="servicos" class="multi-group">
+      <input type="text" placeholder="Descreva o serviço (ex: Criação de Site)">
+    </div>
+    <button class="add-btn" onclick="addField('servicos')">
+      <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      Adicionar serviço
+    </button>
+  </div>
+
+  <div class="section-card" style="animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards;">
+    <h2>Datas / Períodos</h2>
+    <div id="datas" class="multi-group">
+      <input type="text" placeholder="Informe uma data ou preferência">
+    </div>
+    <button class="add-btn" onclick="addField('datas')">
+      <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      Adicionar data
+    </button>
+  </div>
+
+  <div class="section-card" style="animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards;">
+    <h2>Links de Referência</h2>
+    <div id="links" class="multi-group">
+      <input type="url" placeholder="Cole um link aqui (ex: Instagram)">
+    </div>
+    <button class="add-btn" onclick="addField('links')">
+      <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      Adicionar link
+    </button>
+  </div>
+
+  <div class="section-card" style="animation-delay: 0.5s; opacity: 0; animation-fill-mode: forwards;">
+    <h2>Observações Gerais</h2>
+    <textarea id="observacoes" placeholder="Detalhes adicionais, dúvidas ou ideias..."></textarea>
+  </div>
+
+  <div class="submit-container">
+    <button class="submit-btn" onclick="enviarWhats()">
+      Enviar Solicitação
+    </button>
+  </div>
+
+  <div class="footer">
+    andré lustosa 2025
+  </div>
+</div>
+
+<script>
+  // ==========================================================
+  // LÓGICA MANTIDA INTEGRALMENTE CONFORME SOLICITADO
+  // ==========================================================
+
+  // Função para adicionar novos campos dinamicamente
+  function addField(id) {
+    const container = document.getElementById(id);
+    const originalInput = container.querySelector('input');
+    
+    // Cria novo input
+    const newInput = document.createElement('input');
+    newInput.type = originalInput.type;
+    newInput.placeholder = originalInput.placeholder;
+    newInput.style.marginTop = "10px"; // Pequeno ajuste visual para inputs adicionados dinamicamente
+    
+    // Animação de entrada
+    newInput.style.opacity = '0';
+    newInput.style.transform = 'translateY(-10px)';
+    
+    container.appendChild(newInput);
+    
+    // Trigger animação
+    setTimeout(() => {
+      newInput.style.opacity = '1';
+      newInput.style.transform = 'translateY(0)';
+    }, 10);
+    
+    newInput.focus();
+  }
+
+  // Coleta valores de grupos de inputs
+  function coletarValores(id) {
+    const inputs = document.getElementById(id).querySelectorAll('input');
+    const valores = Array.from(inputs)
+      .map(input => input.value.trim())
+      .filter(valor => valor !== '');
+      
+    if (valores.length === 0) return null;
+    return valores.map(v => `• ${v}`).join('\n');
+  }
+
+  function enviarWhats() {
+    // Coleta dados
+    const nome = document.getElementById('nome').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const observacoes = document.getElementById('observacoes').value.trim();
+
+    const servicos = coletarValores('servicos');
+    const datas = coletarValores('datas');
+    const links = coletarValores('links');
+
+    // Validação básica
+    if (!nome) {
+      alert("Por favor, preencha pelo menos o seu Nome.");
+      document.getElementById('nome').focus();
+      return;
+    }
+
+    // Montagem da mensagem formatada para WhatsApp
+    const mensagem = 
+`🚀 *NOVA SOLICITAÇÃO WEB* 🚀
+
+👤 *Dados do Cliente*
+Nome: ${nome}
+${telefone ? `Tel: ${telefone}` : ''}
+${email ? `Email: ${email}` : ''}
+
+🛠️ *Serviços Desejados*
+${servicos || '— Nenhum especificado'}
+
+📅 *Datas / Prazos*
+${datas || '— A combinar'}
+
+🔗 *Referências / Links*
+${links || '— Sem links'}
+
+📝 *Observações*
+${observacoes || '— Nenhuma observação adicional'}
+
+_Enviado via Formulário Digital_`;
+
+    // Número definido no prompt original
+    const numeroWhatsApp = "5586981312925";
+    
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+    
+    // Abre em nova aba
+    window.open(url, '_blank');
+  }
+</script>
+
+</body>
+</html>
